@@ -52,6 +52,12 @@ static uint16_t PcUartProtHandler( uint8_t* ptrRxBuffer, uint8_t* ptrTxBuffer )
     case PCUART_READ_DATA:
       resp_length = PC_ReadDataHandler(ptrRxBuffer[1], ptrTxBuffer);
       resp_length++;
+      break;
+    // Write Data
+    case PCUART_WRITE_DATA:
+      PC_WriteDataHandler(&ptrRxBuffer[1]);
+      resp_length = 1;
+      break;
     default:
       break;
 
