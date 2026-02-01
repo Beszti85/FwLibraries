@@ -88,9 +88,12 @@ uint8_t PCUART_ProcessRxCmd( uint8_t* ptrRxBuffer, uint8_t* ptrTxBuffer )
       ptrTxBuffer[4] = ptrRxBuffer[4] | 0x80u;
       // CRC OK: process data frame
       response_length = PcUartProtHandler(&ptrRxBuffer[4], &ptrTxBuffer[5u]);
+      // increment response length with response code in byte4
+      response_length++;
       ptrTxBuffer[1] = response_length;
       ptrTxBuffer[2] = response_length;
-      ptrTxBuffer[4 + response_length + 1u] = PcUartCrc8( 0u, &ptrTxBuffer[4u], response_length);
+      ptrTxBuffer[4 + response_length] = PcUartCrc8( 0u, &ptrTxBuffer[4u], response_length);
+      ptrTxBuffer[4 + response_length + 1] = 0x27u;
       response_length += 6u;
     }
   }
