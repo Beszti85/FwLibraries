@@ -60,9 +60,8 @@ static uint16_t PcUartProtHandler( uint8_t* ptrRxBuffer, uint8_t* ptrTxBuffer )
       break;
     default:
       break;
-
-    return resp_length;
   }
+  return resp_length;
 }
 
 uint8_t PCUART_ProcessRxCmd( uint8_t* ptrRxBuffer, uint8_t* ptrTxBuffer )
